@@ -13,6 +13,7 @@
     />
 
     <link rel="stylesheet" href="/css/styles.css" />
+    <script src="index.js" defer></script>
 
     <title>Frontend Mentor | Tip calculator app</title>
 
@@ -35,7 +36,11 @@
     <main class="calculator-container">
       <form class="calculator-form" action="">
         <fieldset>
-          <label for="bill" name="bill" id="bill">Bill</label>
+            <div class="calculator-input__text-container">
+
+          <label for="bill" name="bill">Bill</label>
+          <span class="calculator-input__bill-error hidden">Can't be zero</span>
+            </div>
           <input
             class="calculator-input__bill"
             id="bill"
@@ -107,12 +112,15 @@
         </fieldset>
 
         <fieldset>
-          <label
+            <div class="calculator-input__text-container">
+                <label
             for="number-of-people"
             name="number-of-people"
-            id="number-of-people"
             >Number of People</label
           >
+          <span class="calculator-input__people-error hidden">Can't be zero</span>
+            </div>
+          
           <input
             class="calculator-input__people"
             name="number-of-people"
@@ -130,14 +138,14 @@
             <h1>Tip Amount</h1>
             <span>/ person</span>
           </div>
-          <span class="calculator-result__tip__amount">$4.27</span>
+          <span class="calculator-result__tip__amount">&nbsp;</span>
         </div>
         <div class="calculator-result__total">
           <div class="calculator-result__total__label">
             <h1>Total</h1>
             <span>/ person</span>
           </div>
-          <span class="calculator-result__total__amount">$32.79</span>
+          <span class="calculator-result__total__amount">&nbsp;</span>
         </div>
         <button class="calculator-result__button">reset</button>
       </div>
