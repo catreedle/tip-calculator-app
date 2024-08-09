@@ -15,6 +15,7 @@
   --color-light-grayish-cyan: hsl(185, 41%, 84%);
   --color-very-light-cyan: hsl(189, 41%, 97%);
   --color-white: hsl(0, 0%, 100%);
+  --color-mint-cyan: #9FE8DF;
 }
 
 *,
@@ -126,7 +127,8 @@ label {
 }
 
 .calculator-tip__select:hover {
-    background-color: var(--color-primary-cyan);
+    background-color: var(--color-mint-cyan);
+    color: var(--color-dark-cyan);
 }
 
 .calculator-tip__radio {
@@ -196,4 +198,8 @@ label {
   letter-spacing: 1px;
   border: none;
   cursor: pointer;
+}
+
+.calculator-result__button:hover {
+    background-color: var(--color-mint-cyan);
 }
