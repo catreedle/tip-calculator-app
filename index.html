@@ -29,30 +29,81 @@
   </head>
   <body>
     <header class="calculator-header">
-      <h1>splitter</h1>
+      <img src="/images/logo.svg" alt="logo" />
     </header>
 
     <main class="calculator-container">
-      <form action="">
+      <form class="calculator-form" action="">
         <fieldset>
           <label for="bill" name="bill" id="bill">Bill</label>
-          <input type="text" />
+          <input
+            class="calculator-input__bill"
+            id="bill"
+            type="number"
+            name="bill"
+            placeholder="0"
+          />
         </fieldset>
 
         <fieldset>
           <label for="select-tip" name="select-tip" id="select-tip"
             >Select Tip %</label
           >
-          <div class="select-container">
-            <select name="select-tip" id="">
-              <option value="">5%</option>
-              <option value="">10%</option>
-              <option value="">15%</option>
-              <option value="">25%</option>
-              <option value="">50%</option>
-              <option value="">Custom</option>
-            </select>
-          </div>
+
+          <div class="calculator-tip__container">
+            <input
+              type="radio"
+              id="5"
+              name="select-tip"
+              value="5"
+              class="calculator-tip__radio"
+            />
+            <label for="5" class="calculator-tip__select">5%</label>
+
+            <input
+              type="radio"
+              id="10"
+              name="select-tip"
+              value="10"
+              class="calculator-tip__radio"
+            />
+            <label for="10" class="calculator-tip__select">10%</label>
+
+            <input
+              type="radio"
+              id="15"
+              name="select-tip"
+              value="15"
+              class="calculator-tip__radio"
+            />
+            <label for="15" class="calculator-tip__select">15%</label>
+
+            <input
+              type="radio"
+              id="25"
+              name="select-tip"
+              value="25"
+              class="calculator-tip__radio"
+            />
+            <label for="25" class="calculator-tip__select">25%</label>
+
+          <input
+            type="radio"
+            id="50"
+            name="select-tip"
+            value="50"
+            class="calculator-tip__radio"
+          />
+          <label for="50" class="calculator-tip__select">50%</label>
+
+          <input
+              type="radio"
+              id="custom"
+              name="select-tip"
+              value=""
+              class="calculator-tip__radio"
+            />
+            <label for="custom" class="calculator-tip__select">Custom</label>
         </fieldset>
 
         <fieldset>
@@ -62,7 +113,14 @@
             id="number-of-people"
             >Number of People</label
           >
-          <input name="number-of-people" id="number-of-people" type="number" />
+          <input
+            class="calculator-input__people"
+            name="number-of-people"
+            id="number-of-people"
+            type="number"
+            placeholder="0"
+          />
+        </div>
         </fieldset>
       </form>
 
