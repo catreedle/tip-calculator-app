@@ -1,44 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Tip calculator app</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+    <link rel="stylesheet" href="/css/styles.css" />
 
-  Bill
+    <title>Frontend Mentor | Tip calculator app</title>
 
-  Select Tip %
-  5%
-  10%
-  15%
-  25%
-  50%
-  Custom
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="calculator-header">
+      <h1>splitter</h1>
+    </header>
 
-  Number of People
+    <main class="calculator-container">
+      <form action="">
+        <fieldset>
+          <label for="bill" name="bill" id="bill">Bill</label>
+          <input type="text" />
+        </fieldset>
 
-  Tip Amount
-  / person
+        <fieldset>
+          <label for="select-tip" name="select-tip" id="select-tip"
+            >Select Tip %</label
+          >
+          <div class="select-container">
+            <select name="select-tip" id="">
+              <option value="">5%</option>
+              <option value="">10%</option>
+              <option value="">15%</option>
+              <option value="">25%</option>
+              <option value="">50%</option>
+              <option value="">Custom</option>
+            </select>
+          </div>
+        </fieldset>
 
-  Total
-  / person
+        <fieldset>
+          <label
+            for="number-of-people"
+            name="number-of-people"
+            id="number-of-people"
+            >Number of People</label
+          >
+          <input name="number-of-people" id="number-of-people" type="number" />
+        </fieldset>
+      </form>
 
-  Reset
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+      <div class="calculator-result">
+        <div class="calculator-result__tip">
+          <div class="calculator-result__tip__label">
+            <h1>Tip Amount</h1>
+            <span>/ person</span>
+          </div>
+          <span class="calculator-result__tip__amount">$4.27</span>
+        </div>
+        <div class="calculator-result__total">
+          <div class="calculator-result__total__label">
+            <h1>Total</h1>
+            <span>/ person</span>
+          </div>
+          <span class="calculator-result__total__amount">$32.79</span>
+        </div>
+        <button class="calculator-result__button">reset</button>
+      </div>
+    </main>
+    <footer class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Your Name Here</a>.
+    </footer>
+  </body>
 </html>
