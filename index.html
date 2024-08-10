@@ -36,11 +36,12 @@
     <main class="calculator-container">
       <form class="calculator-form" action="">
         <fieldset>
-            <div class="calculator-input__text-container">
-
-          <label for="bill" name="bill">Bill</label>
-          <span class="calculator-input__bill-error hidden">Can't be zero</span>
-            </div>
+          <div class="calculator-input__text-container">
+            <label for="bill" name="bill">Bill</label>
+            <span class="calculator-input__bill-error hidden"
+              >Can't be zero</span
+            >
+          </div>
           <input
             class="calculator-input__bill"
             id="bill"
@@ -51,9 +52,14 @@
         </fieldset>
 
         <fieldset>
-          <label for="select-tip" name="select-tip" id="select-tip"
-            >Select Tip %</label
-          >
+          <div class="calculator-input__text-container">
+            <label for="select-tip" name="select-tip" id="select-tip"
+              >Select Tip %</label
+            >
+            <span class="calculator-input__tip-error hidden"
+              >Can't be zero</span
+            >
+          </div>
 
           <div class="calculator-tip__container">
             <input
@@ -92,43 +98,58 @@
             />
             <label for="25" class="calculator-tip__select">25%</label>
 
-          <input
-            type="radio"
-            id="50"
-            name="select-tip"
-            value="50"
-            class="calculator-tip__radio"
-          />
-          <label for="50" class="calculator-tip__select">50%</label>
+            <input
+              type="radio"
+              id="50"
+              name="select-tip"
+              value="50"
+              class="calculator-tip__radio"
+            />
+            <label for="50" class="calculator-tip__select">50%</label>
 
-          <input
+            <input
               type="radio"
               id="custom"
               name="select-tip"
-              value=""
+              value="custom"
               class="calculator-tip__radio"
             />
-            <label for="custom" class="calculator-tip__select">Custom</label>
+            <label
+              for="custom"
+              class="calculator-tip__select calculator-tip__radio__custom"
+              >Custom</label
+            >
+
+            <div class="calculator-tip__select__custom__container hidden">
+              <!-- <label for="custom-input">Custom</label> -->
+              <input
+                type="number"
+                id="custom-input"
+                class="calculator-tip__select__custom__input"
+                placeholder="0"
+              />
+            </div>
+          </div>
         </fieldset>
 
         <fieldset>
-            <div class="calculator-input__text-container">
-                <label
-            for="number-of-people"
-            name="number-of-people"
-            >Number of People</label
-          >
-          <span class="calculator-input__people-error hidden">Can't be zero</span>
-            </div>
-          
+          <div class="calculator-input__text-container">
+            <label for="number-of-people" name="number-of-people"
+              >Number of People</label
+            >
+            <span class="calculator-input__people-error hidden"
+              >Can't be zero</span
+            >
+          </div>
+
           <input
             class="calculator-input__people"
             name="number-of-people"
             id="number-of-people"
             type="number"
             placeholder="0"
+            step="1"
           />
-        </div>
         </fieldset>
       </form>
 
