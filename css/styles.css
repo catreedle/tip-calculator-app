@@ -240,12 +240,19 @@ label {
 
 .calculator-result__total__amount,
 .calculator-result__tip__amount {
-  width: 10rem;
+  display: inline-block;
+  width: 11rem;
   font-size: 2rem;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   text-align: right;
+}
+
+.calculator-result__total__amount,
+.calculator-result__tip__amount:hover {
+  overflow: auto;
+  text-overflow: initial;
 }
 
 .calculator-result__button {
@@ -320,7 +327,7 @@ label {
   .calculator-result__tip__amount,
   .calculator-result__total__amount {
     font-size: 48px;
-    width: 20rem;
+    width: 15rem;
   }
 
   .calculator-result__button {
