@@ -149,7 +149,8 @@ label {
 }
 
 .calculator-input__people-error,
-.calculator-input__bill-error, .calculator-input__tip-error {
+.calculator-input__bill-error,
+.calculator-input__tip-error {
   font-size: 16px;
   color: var(--color-error);
 }
@@ -239,7 +240,7 @@ label {
 
 .calculator-result__total__amount,
 .calculator-result__tip__amount {
-  width: 20rem;
+  width: 10rem;
   font-size: 2rem;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -312,6 +313,7 @@ label {
   .calculator-result__tip__amount,
   .calculator-result__total__amount {
     font-size: 48px;
+    width: 20rem;
   }
 
   .calculator-result__button {
