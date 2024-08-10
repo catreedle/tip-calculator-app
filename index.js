@@ -1,8 +1,28 @@
+const billInputElement = document.getElementById("bill");
+const peopleInputElement = document.getElementById("number-of-people");
+const selectTipElement = document.getElementsByName("select-tip");
+const selectTipCustomRadioElement = document.querySelector(
+  ".calculator-tip__radio__custom"
+);
+const selectTipCustomContainerElement = document.querySelector(
+  ".calculator-tip__select__custom__container"
+);
+const selectTipCustomInputElement = document.getElementById("custom-input");
+const peopleErrorElement = document.querySelector(
+  ".calculator-input__people-error"
+);
+const billErrorElement = document.querySelector(
+  ".calculator-input__bill-error"
+);
+
+let bill = "";
+let numberOfPeople = "";
+let tipPercentage = "";
+
 function calculateTip(bill, tipPercentage, numberOfPeople) {
   const tipAmount = ((bill * (tipPercentage / 100)) / numberOfPeople).toFixed(
     2
   );
-
   const totalAmount = (bill / numberOfPeople + parseFloat(tipAmount)).toFixed(
     2
   );
@@ -29,75 +49,52 @@ function validateAllInputs(...inputs) {
 
 function resetCalculator() {}
 
-const billInputElement = document.getElementById("bill");
-const peopleInputElement = document.getElementById("number-of-people");
-const selectTipElement = document.getElementsByName("select-tip");
-const selectTipCustomRadioElement = document.querySelector(
-  ".calculator-tip__radio__custom"
-);
-const selectTipCustomContainerElement = document.querySelector(
-  ".calculator-tip__select__custom__container"
-);
-const selectTipCustomInputElement = document.getElementById("custom-input");
-
-let bill = "";
-let numberOfPeople = "";
-let tipPercentage = "";
-
-billInputElement.addEventListener("input", function (e) {
-  bill = handleInputChange(e);
-  const billErrorElement = document.querySelector(
-    ".calculator-input__bill-error"
-  );
-
-  if (!validateInput(bill)) {
-    billErrorElement.classList.remove("hidden");
-    billErrorElement.classList.add("visible");
-    billInputElement.classList.add("calculator-input--error");
+function toggleDisplayError(
+  inputValue,
+  errorMessageElement,
+  inputFieldElement
+) {
+  if (!validateInput(inputValue)) {
+    errorMessageElement.classList.remove("hidden");
+    errorMessageElement.classList.add("visible");
+    inputFieldElement.classList.add("calculator-input--error");
     emptyCalulationResult();
-
-    return;
   } else {
     enableResetButton();
-    billErrorElement.classList.remove("visible");
-    billErrorElement.classList.add("hidden");
-    billInputElement.classList.remove("calculator-input--error");
+    errorMessageElement.classList.remove("visible");
+    errorMessageElement.classList.add("hidden");
+    inputFieldElement.classList.remove("calculator-input--error");
   }
+}
+
+function validateAndCalculate(bill, tipPercentage, numberOfPeople) {
   if (validateAllInputs(bill, tipPercentage, numberOfPeople)) {
     const result = calculateTip(bill, tipPercentage, numberOfPeople);
 
     showCalculationResult(result);
   }
-});
+}
 
-peopleInputElement.addEventListener("input", function (e) {
+function preventDecimalInput(e) {
   let value = e.target.value;
   value = value.split(".")[0]; // prevent decimal input
   e.target.value = value;
+  return e;
+}
+
+billInputElement.addEventListener("input", function (e) {
+  bill = handleInputChange(e);
+
+  toggleDisplayError(bill, billErrorElement, billInputElement);
+  validateAndCalculate(bill, tipPercentage, numberOfPeople);
+});
+
+peopleInputElement.addEventListener("input", function (e) {
+  e = preventDecimalInput(e);
   numberOfPeople = handleInputChange(e);
 
-  const peopleErrorElement = document.querySelector(
-    ".calculator-input__people-error"
-  );
-
-  if (!validateInput(numberOfPeople)) {
-    peopleErrorElement.classList.remove("hidden");
-    peopleErrorElement.classList.add("visible");
-    peopleInputElement.classList.add("calculator-input--error");
-    emptyCalulationResult();
-
-    return;
-  } else {
-    enableResetButton();
-    peopleErrorElement.classList.remove("visible");
-    peopleErrorElement.classList.add("hidden");
-    peopleErrorElement.classList.remove("calculator-input--error");
-  }
-  if (validateAllInputs(bill, tipPercentage, numberOfPeople)) {
-    const result = calculateTip(bill, tipPercentage, numberOfPeople);
-
-    showCalculationResult(result);
-  }
+  toggleDisplayError(numberOfPeople, peopleErrorElement, peopleInputElement);
+  validateAndCalculate(bill, tipPercentage, numberOfPeople);
 });
 
 function handleInputChange(event) {
@@ -171,7 +168,6 @@ const totalAmountElement = document.querySelector(
 
 function showCalculationResult(result) {
   tipAmountElement.textContent = "$" + result.tipAmount;
-
   totalAmountElement.textContent = "$" + result.totalAmount;
 }
 
@@ -182,9 +178,9 @@ function emptyCalulationResult() {
 
 const resetButton = document.querySelector(".calculator-result__button");
 
-resetButton.addEventListener("click", function() {
-    window.location.reload()
-})
+resetButton.addEventListener("click", function () {
+  window.location.reload();
+});
 
 function disableResetButton() {
   resetButton.classList.add("calculator-result__button--disabled");
@@ -196,11 +192,11 @@ function enableResetButton() {
 }
 
 function togglePropertyDisabled() {
-    if (resetButton.hasAttribute('disabled')) {
-        resetButton.removeAttribute('disabled'); // Enable the button
-    } else {
-        resetButton.setAttribute('disabled', 'true'); // Disable the button
-    }
+  if (resetButton.hasAttribute("disabled")) {
+    resetButton.removeAttribute("disabled"); // Enable the button
+  } else {
+    resetButton.setAttribute("disabled", "true"); // Disable the button
+  }
 }
 
 disableResetButton();
