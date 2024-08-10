@@ -58,6 +58,7 @@ billInputElement.addEventListener("input", function (e) {
 
     return;
   } else {
+    enableResetButton();
     billErrorElement.classList.remove("visible");
     billErrorElement.classList.add("hidden");
     billInputElement.classList.remove("calculator-input--error");
@@ -87,6 +88,7 @@ peopleInputElement.addEventListener("input", function (e) {
 
     return;
   } else {
+    enableResetButton();
     peopleErrorElement.classList.remove("visible");
     peopleErrorElement.classList.add("hidden");
     peopleErrorElement.classList.remove("calculator-input--error");
@@ -125,16 +127,18 @@ function handleRadioChange(event) {
         emptyCalulationResult();
         tipErrorElement.classList.remove("hidden");
         tipErrorElement.classList.add("visible");
-      }
-
-      if (validateAllInputs(bill, tipPercentage, numberOfPeople)) {
-        const result = calculateTip(bill, tipPercentage, numberOfPeople);
-        tipErrorElement.classList.add("hidden");
-        tipErrorElement.classList.remove("visible");
-        showCalculationResult(result);
+      } else {
+        enableResetButton();
+        if (validateAllInputs(bill, tipPercentage, numberOfPeople)) {
+          const result = calculateTip(bill, tipPercentage, numberOfPeople);
+          tipErrorElement.classList.add("hidden");
+          tipErrorElement.classList.remove("visible");
+          showCalculationResult(result);
+        }
       }
     });
   } else {
+    enableResetButton();
     selectTipCustomRadioElement.classList.remove("hidden");
     selectTipCustomRadioElement.classList.add("visible");
     selectTipCustomContainerElement.classList.remove("visible");
@@ -172,6 +176,31 @@ function showCalculationResult(result) {
 }
 
 function emptyCalulationResult() {
-  tipAmountElement.textContent = "";
-  totalAmountElement.textContent = "";
+  tipAmountElement.textContent = "$0.00";
+  totalAmountElement.textContent = "$0.00";
 }
+
+const resetButton = document.querySelector(".calculator-result__button");
+
+resetButton.addEventListener("click", function() {
+    window.location.reload()
+})
+
+function disableResetButton() {
+  resetButton.classList.add("calculator-result__button--disabled");
+}
+
+function enableResetButton() {
+  resetButton.classList.remove("calculator-result__button--disabled");
+  togglePropertyDisabled();
+}
+
+function togglePropertyDisabled() {
+    if (resetButton.hasAttribute('disabled')) {
+        resetButton.removeAttribute('disabled'); // Enable the button
+    } else {
+        resetButton.setAttribute('disabled', 'true'); // Disable the button
+    }
+}
+
+disableResetButton();

@@ -265,6 +265,13 @@ label {
   background-color: var(--color-mint-cyan);
 }
 
+.calculator-result__button--disabled,
+.calculator-result__button--disabled:hover {
+  background-color: var(--color-light-grayish-cyan);
+  cursor: default;
+  background-color: #0d686d;
+}
+
 .hidden {
   display: none;
 }
