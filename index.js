@@ -47,8 +47,6 @@ function validateAllInputs(...inputs) {
   return true; // Return true if all inputs pass validation
 }
 
-function resetCalculator() {}
-
 function toggleDisplayError(
   inputValue,
   errorMessageElement,
@@ -58,7 +56,7 @@ function toggleDisplayError(
     errorMessageElement.classList.remove("hidden");
     errorMessageElement.classList.add("visible");
     inputFieldElement.classList.add("calculator-input--error");
-    emptyCalulationResult();
+    emptyCalculationResult();
   } else {
     enableResetButton();
     errorMessageElement.classList.remove("visible");
@@ -114,14 +112,14 @@ const tipErrorElement = document.querySelector(".calculator-input__tip-error");
 function handleRadioChange(event) {
   let value = event.target.value;
   if (value == "custom") {
-    emptyCalulationResult();
+    emptyCalculationResult();
     toggleCustomInputTip();
     selectTipCustomInputElement.addEventListener("input", function (e) {
       value = e.target.value;
       tipPercentage = parseFloat(value);
 
       if (!validateInput(value)) {
-        emptyCalulationResult();
+        emptyCalculationResult();
         tipErrorElement.classList.remove("hidden");
         tipErrorElement.classList.add("visible");
       } else {
@@ -167,19 +165,46 @@ const totalAmountElement = document.querySelector(
 );
 
 function showCalculationResult(result) {
-  tipAmountElement.textContent = "$" + result.tipAmount;
-  totalAmountElement.textContent = "$" + result.totalAmount;
+  let resultTip = 0;
+  let resultTotal = 0;
+  if (
+    result.tipAmount &&
+    result.totalAmount &&
+    !isNaN(result.totalAmount) && !isNaN(result.tipAmount)
+  ) {
+    resultTip = result.tipAmount;
+    resultTotal = result.totalAmount;
+  }
+  tipAmountElement.textContent = "$" + resultTip;
+  totalAmountElement.textContent = "$" + resultTotal;
 }
 
-function emptyCalulationResult() {
-  tipAmountElement.textContent = "$0.00";
-  totalAmountElement.textContent = "$0.00";
+function emptyCalculationResult() {
+  bill = 0;
+  tipPercentage = 0;
+  numberOfPeople = 0;
+  result = calculateTip(bill, tipPercentage, numberOfPeople);
+  showCalculationResult(result);
 }
 
 const resetButton = document.querySelector(".calculator-result__button");
 
+function resetCalculator(...inputElements) {
+  for (let el of inputElements) {
+    if (el instanceof NodeList) {
+      for (let option of el) {
+        option.checked = false;
+      }
+    } else {
+      el.value = "";
+    }
+  }
+
+  emptyCalculationResult();
+}
+
 resetButton.addEventListener("click", function () {
-  window.location.reload();
+  resetCalculator(billInputElement, selectTipElement, peopleInputElement);
 });
 
 function disableResetButton() {
