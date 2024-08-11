@@ -170,7 +170,8 @@ function showCalculationResult(result) {
   if (
     result.tipAmount &&
     result.totalAmount &&
-    !isNaN(result.totalAmount) && !isNaN(result.tipAmount)
+    !isNaN(result.totalAmount) &&
+    !isNaN(result.tipAmount)
   ) {
     resultTip = result.tipAmount;
     resultTotal = result.totalAmount;
@@ -190,6 +191,7 @@ function emptyCalculationResult() {
 const resetButton = document.querySelector(".calculator-result__button");
 
 function resetCalculator(...inputElements) {
+  console.log("click reset");
   for (let el of inputElements) {
     if (el instanceof NodeList) {
       for (let option of el) {
@@ -205,23 +207,15 @@ function resetCalculator(...inputElements) {
 
 resetButton.addEventListener("click", function () {
   resetCalculator(billInputElement, selectTipElement, peopleInputElement);
+  disableResetButton()
 });
 
 function disableResetButton() {
   resetButton.classList.add("calculator-result__button--disabled");
+  resetButton.setAttribute("disabled", "true");
 }
 
 function enableResetButton() {
   resetButton.classList.remove("calculator-result__button--disabled");
-  togglePropertyDisabled();
+  resetButton.removeAttribute("disabled");
 }
-
-function togglePropertyDisabled() {
-  if (resetButton.hasAttribute("disabled")) {
-    resetButton.removeAttribute("disabled"); // Enable the button
-  } else {
-    resetButton.setAttribute("disabled", "true"); // Disable the button
-  }
-}
-
-disableResetButton();
