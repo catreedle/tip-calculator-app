@@ -109,6 +109,16 @@ function toggleCustomInputTip() {
 
 const tipErrorElement = document.querySelector(".calculator-input__tip-error");
 
+function resetSelectTip() {
+  selectTipCustomInputElement.value = "";
+  selectTipCustomRadioElement.classList.remove("hidden");
+  selectTipCustomRadioElement.classList.add("visible");
+  selectTipCustomContainerElement.classList.remove("visible");
+  selectTipCustomContainerElement.classList.add("hidden");
+  tipErrorElement.classList.add("hidden");
+  tipErrorElement.classList.remove("visible");
+}
+
 function handleRadioChange(event) {
   let value = event.target.value;
   if (value == "custom") {
@@ -134,13 +144,7 @@ function handleRadioChange(event) {
     });
   } else {
     enableResetButton();
-    selectTipCustomRadioElement.classList.remove("hidden");
-    selectTipCustomRadioElement.classList.add("visible");
-    selectTipCustomContainerElement.classList.remove("visible");
-    selectTipCustomContainerElement.classList.add("hidden");
-    tipErrorElement.classList.add("hidden");
-    tipErrorElement.classList.remove("visible");
-
+    resetSelectTip();
     const selectedValue = parseFloat(value);
     tipPercentage = selectedValue;
 
@@ -191,7 +195,6 @@ function emptyCalculationResult() {
 const resetButton = document.querySelector(".calculator-result__button");
 
 function resetCalculator(...inputElements) {
-  console.log("click reset");
   for (let el of inputElements) {
     if (el instanceof NodeList) {
       for (let option of el) {
@@ -206,8 +209,14 @@ function resetCalculator(...inputElements) {
 }
 
 resetButton.addEventListener("click", function () {
-  resetCalculator(billInputElement, selectTipElement, peopleInputElement);
-  disableResetButton()
+  resetCalculator(
+    billInputElement,
+    selectTipElement,
+    peopleInputElement,
+    selectTipCustomInputElement
+  );
+  resetSelectTip();
+  disableResetButton();
 });
 
 function disableResetButton() {
